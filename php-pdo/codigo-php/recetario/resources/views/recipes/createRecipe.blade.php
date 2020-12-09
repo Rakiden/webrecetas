@@ -27,7 +27,7 @@
                     </a>
                     @else
                     <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Usuario
+                    {{Auth::user()->name}}
                     </a>
                     @endif
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -50,12 +50,27 @@
                 <div class="col-3 nomarpad"><input id="image" type="file" name="image" required></div>
                 <div class="col-9 nomarpad">
                     <div class="row nomarpad">
-                        <div class="col-12 nomarpad"><label for="title">Titulo de la receta</label><input type="text" class="form-control" id="title" placeholder="" name="title" required></div>
-                        <div class="col-12 nomarpad"><label for="ingredients">Ingredientes de la receta</label><input type="text" class="form-control" id="ingredients" placeholder="" name="ingredients" required></div>    
-                                
+                        <div class="col-10 nomarpad" style="margin: 10px!important;"><label for="title" style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
+                                        max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">Titulo de la receta</label>
+                        <input type="text" class="form-control" id="title" name="title" required></input></div>
+                        <div class="col-10 nomarpad" style="margin: 10px!important;"><label for="ingredients" style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
+                                        max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">Ingredientes de la receta</label>
+                        <input type="text" class="form-control" id="ingredients" name="ingredients" required></div>    
+                        <div class="col-10 nomarpad" style="margin: 10px!important;"><label for="category" style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
+                                        max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">Categoria</label>
+                                                    <select class="form-control" id="category" name="category" require>
+                                                        <option>Carne</option>
+                                                        <option>Pasta</option>
+                                                        <option>Vegetariana</option>
+                                                        <option>Vegana</option>
+                                                        <option>Pescado</option>
+                                                        <option>Cazuela</option>
+                                                    </select></div>
                     </div>
                 </div>
-                <div class="col-12"><div class="col-12 nomarpad"><textarea class="form-control" name="description" id="description" cols="100" rows="5" required></textarea></div>
+                <div class="col-12 nomarpad" style="margin: 10px!important;"><label for="category" style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
+                                        max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">Descripción</label></div>
+                <div class="col-11 nomarpad" style="margin: 10px!important;"><textarea class="form-control" name="description" id="description" cols="100" rows="5" required></textarea></div>
                 <div class="col-12"><div class="col-12 nomarpad"><button type="submit" class="btn btn-primary">Enviar</button></div>
             </div>
         </form>

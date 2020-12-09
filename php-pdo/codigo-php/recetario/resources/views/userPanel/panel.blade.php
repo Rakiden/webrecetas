@@ -39,7 +39,7 @@
                     </a>
                     @else
                     <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Usuario
+                    {{Auth::user()->name}}
                     </a>
                     @endif
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

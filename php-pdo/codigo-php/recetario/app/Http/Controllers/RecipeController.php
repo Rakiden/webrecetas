@@ -15,11 +15,11 @@ class RecipeController extends Controller
     public function getIndex(Request $request){
         
         if(request()->has('category')){
-            $recipes = Recipe::where('category',request('category'))->orderBy('id','desc')->paginate(12)->appends('category', request('category'));
+            $recipes = Recipe::where('category',request('category'))->orderBy('id','desc')->paginate(9)->appends('category', request('category'));
         }elseif(request()->has('search')){
-            $recipes = Recipe::where('title', 'like', '%'.request('search').'%')->orderBy('id','desc')->paginate(12)->appends('title', request('search'));
+            $recipes = Recipe::where('title', 'like', '%'.request('search').'%')->orderBy('id','desc')->paginate(9)->appends('title', request('search'));
         }else{
-            $recipes = Recipe::orderBy('id','desc')->paginate(12);
+            $recipes = Recipe::orderBy('id','desc')->paginate(9);
         }
         
         return view('index',['recipes'=> $recipes]);

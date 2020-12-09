@@ -18,7 +18,7 @@ class CreateRecipeTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('ingredients');
             $table->string('category');
             $table->longText('image');

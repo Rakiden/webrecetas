@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/index">Índice <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/index">Índice<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto"style="margin-right: 88px;">

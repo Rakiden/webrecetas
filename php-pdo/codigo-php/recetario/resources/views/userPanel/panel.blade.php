@@ -47,6 +47,7 @@
                     <a class="dropdown-item" href="/login">Log-in</a>
                     @else
                     <a class="dropdown-item" href="/panel/">Panel</a>
+                    <a class="dropdown-item" href="/panel/">Favoritos</a>
                     <a class="dropdown-item" href="/logout">Log-out</a>
                     @endif
                     </div>
@@ -63,7 +64,7 @@
         <div class="row nomarpad">
             @foreach($myRecipes as $recipe)
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 nomarpad mb-3">
-                <form method="POST" action="../myrecipe/{{$recipe->id}}">
+                <!--<form method="POST" action="../myrecipe/{{$recipe->id}}">-->
                     <div class="row nomarpad">
                         @csrf
                             <a href="{{url('recipe/'.$recipe->id)}}" style="text-decoration:none;color:#404b56">
@@ -74,12 +75,12 @@
                                     <div class="col-6 nomarpad" style="padding:10px!important">
                                         <p style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
                                             max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">{{$recipe->title}}</p>
-                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Editar</button>
                                     </div>
                                    
                                 </div>
                             </a>
-                        </form>
+                        <!--</form>-->
                     </div>
                 </div> 
             @endforeach
@@ -94,7 +95,25 @@
             <div class="col-12">{{$myRecipes->links("pagination::bootstrap-4")}}</div>  
         </div>
     
-
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 <!-- CSS -->

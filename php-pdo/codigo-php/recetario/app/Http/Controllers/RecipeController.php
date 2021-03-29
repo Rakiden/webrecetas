@@ -29,7 +29,15 @@ class RecipeController extends Controller
         $recipe = Recipe::find($id);
         $comments = DB::table('comment')->where('recipe_id',$id)->orderBy('id','desc')->paginate(20);
         $userId = Auth::id();
-        return view('recipes/recipe', ['recipe'=> $recipe, 'comments'=>$comments]);
+        $favourites = DB::table('favourite')->where('recipe_id',$id)->where('user_id',$userId)->get();
+        $isFavourite;
+        if(count($favourites)!=0){
+            $isFavourite=true;
+        }else{
+            $isFavourite=false;
+        }
+        
+        return view('recipes/recipe', ['recipe'=> $recipe, 'comments'=>$comments, 'isFavourite'=>$isFavourite]);
     }
 
     public function getPanel(Request $request){
@@ -54,7 +62,8 @@ class RecipeController extends Controller
     }
 
     public function getcreateRecipe(){ 
-        return view('recipes/createRecipe',['mode'=>1]);
+        $categories = DB::table('category')->orderBy('id','asc')->get();
+        return view('recipes/createRecipe',['categories'=>$categories,'mode'=>1]);
     }
 
     public function createRecipe(Request $request){ 
@@ -64,7 +73,7 @@ class RecipeController extends Controller
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
                 'ingredients' => $request->input('ingredients'),
-                'category' => $request->input('category'),
+                'category_id' => $request->input('category'),
                 'image' => 'data:image/jpeg;base64,'.base64_encode(file_get_contents($request->file('image')->path())),
                 ]);
 
@@ -77,7 +86,9 @@ class RecipeController extends Controller
 
     public function getupdateRecipe($recipe_id){ 
         $recipe = Recipe::find($recipe_id);
-        return view('recipes/createRecipe',['mode'=>2, 'recipe' => $recipe]);
+        $category_id=$recipe->get()[0]->category_id;
+        $categories = DB::table('category')->orderBy('id','asc')->get();
+        return view('recipes/createRecipe',['mode'=>2, 'recipe' => $recipe, 'category_id'=>$category_id,'categories'=>$categories]);
     }
 
     public function updateRecipe(Request $request,$recipe_id){ 
@@ -120,5 +131,48 @@ class RecipeController extends Controller
         $comments = DB::table('comment')->where('recipe_id',$recipe_id)->orderBy('id','desc')->paginate(20);
 
         return view('recipes/recipe', ['recipe'=> $recipe, 'comments'=>$comments]);
+    }
+
+    public function getCategories(){ 
+        $categories = DB::table('category');
+
+        return view('recipes/recipe', ['recipe'=> $recipe, 'comments'=>$comments]);
+    }
+
+    
+    public function setRecipeFavourite($recipe_id){ 
+       
+       $userId = Auth::id();
+        DB::table('favourite')->insert([
+            'user_id' => $userId,
+            'recipe_id' => $recipe_id
+        ]);
+
+        $recipe = Recipe::find($recipe_id);
+        $comments = DB::table('comment')->where('recipe_id',$recipe_id)->orderBy('id','desc')->paginate(20);
+        $favourites = DB::table('favourite')->where('recipe_id',$recipe_id)->where('user_id',$userId)->get();
+        $isFavourite;
+        if(count($favourites)!=0){
+            $isFavourite=true;
+        }else{
+            $isFavourite=false;
+        }
+        return view('recipes/recipe', ['recipe'=> $recipe, 'comments'=>$comments, 'isFavourite'=>$isFavourite]);
+    }
+    public function unsetRecipeFavourite($recipe_id){ 
+    
+        $userId = Auth::id();
+        DB::table('favourite')->where('recipe_id',$recipe_id)->where('user_id',$userId)->delete();
+
+        $recipe = Recipe::find($recipe_id);
+        $comments = DB::table('comment')->where('recipe_id',$recipe_id)->orderBy('id','desc')->paginate(20);
+        $favourites = DB::table('favourite')->where('recipe_id',$recipe_id)->where('user_id',$userId)->get();
+        $isFavourite;
+        if(count($favourites)!=0){
+            $isFavourite=true;
+        }else{
+            $isFavourite=false;
+        }
+        return view('recipes/recipe', ['recipe'=> $recipe, 'comments'=>$comments, 'isFavourite'=>$isFavourite]);
     }
 }

@@ -35,6 +35,7 @@
                     <a class="dropdown-item" href="/login">Log-in</a>
                     @else
                     <a class="dropdown-item" href="/panel/">Panel</a>
+                    <a class="dropdown-item" href="/panel/">Favoritos</a>
                     <a class="dropdown-item" href="/logout">Log-out</a>
                     @endif
                     </div>
@@ -59,12 +60,9 @@
                         <div class="col-10 nomarpad" style="margin: 10px!important;"><label for="category" style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
                                         max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">Categoria</label>
                                                     <select class="form-control" id="category" name="category" require>
-                                                        <option>Carne</option>
-                                                        <option>Pasta</option>
-                                                        <option>Vegetariana</option>
-                                                        <option>Vegana</option>
-                                                        <option>Pescado</option>
-                                                        <option>Cazuela</option>
+                                                        @foreach ($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                        @endforeach
                                                     </select></div>
                     </div>
                 </div>
@@ -90,12 +88,13 @@
                         <div class="col-10 nomarpad" style="margin: 10px!important;"><label for="category" style="text-decoration:none;text-decoration:underline; font-weight:bold;word-break: break-word;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;line-height: 16px; /* fallback */
                                         max-height: 32px; /* fallback */-webkit-line-clamp: 2; /* number of lines to show */-webkit-box-orient: vertical;">Categoria</label>
                                                     <select class="form-control" id="category" name="category" require>
-                                                        <option>Carne</option>
-                                                        <option>Pasta</option>
-                                                        <option>Vegetariana</option>
-                                                        <option>Vegana</option>
-                                                        <option>Pescado</option>
-                                                        <option>Cazuela</option>
+                                                        @foreach ($categories as $category)
+                                                            @if($category->id==$category_id)
+                                                            <option selected value="{{$category->id}}">{{$category->name}}</option>
+                                                            @else
+                                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                                            @endif
+                                                        @endforeach
                                                     </select></div>
                     </div>
                 </div>

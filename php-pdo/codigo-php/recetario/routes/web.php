@@ -24,6 +24,8 @@ Route::post('create','App\Http\Controllers\RecipeController@createRecipe')->midd
 Route::post('myrecipe/{id}','App\Http\Controllers\RecipeController@getupdateRecipe')->middleware('auth');
 Route::post('update/{id}','App\Http\Controllers\RecipeController@updateRecipe')->middleware('auth');
 Route::post('delete/{id}','App\Http\Controllers\RecipeController@deleteRecipe')->middleware('auth');
+Route::post('favourite/{id}','App\Http\Controllers\RecipeController@setRecipeFavourite')->middleware('auth');
+Route::post('unfavourite/{id}','App\Http\Controllers\RecipeController@unsetRecipeFavourite')->middleware('auth');
 Route::get('recipe/{id}','App\Http\Controllers\RecipeController@getRecipe');
 Route::post('comment/{recipe_id}','App\Http\Controllers\RecipeController@insertComment')->middleware('auth');
 Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout', function () {

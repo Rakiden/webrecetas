@@ -47,6 +47,7 @@
                     <a class="dropdown-item" href="/login">Log-in</a>
                     @else
                     <a class="dropdown-item" href="/panel/">Panel</a>
+                    <a class="dropdown-item" href="/panel/">Favoritos</a>
                     <a class="dropdown-item" href="/logout">Log-out</a>
                     @endif
                     </div>

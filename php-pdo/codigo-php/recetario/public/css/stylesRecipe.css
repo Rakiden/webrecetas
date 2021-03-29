@@ -14,3 +14,14 @@
 .pagination{
     justify-content: center;
 }
+
+.btn-primary{
+    color: #fff!important; 
+    background-color: #e88f3a!important;
+    border-color: #e08421!important;
+}
+.btn-primary:hover{
+    color: #fff;
+    background-color: #be732d!important;
+    border-color: #af6413!important;
+}
